@@ -12,8 +12,23 @@ for (const palabra of palabras) {
       nuevaPalabra.textContent = nuevaPalabra.textContent.charAt(0).toUpperCase() + nuevaPalabra.textContent.slice(1);
     } */
     document.querySelector(".resultado").append(nuevaPalabra);
+    contarPalabras();
+    contarCaracteres();
   });
 }
+
+document.querySelector(".numero-palabras").textContent = 0;
+document.querySelector(".numero-caracteres").textContent = 0;
+document.querySelector(".longitud-media").textContent = 0;
+
+function contarPalabras() {
+  const totalPalabras = document.querySelector(".resultado").children.length;
+  document.querySelector(".numero-palabras").textContent = totalPalabras;
+}
+function contarCaracteres() {
+  const sumaCaracteres = document.querySelector(".resultado").textContent.length;
+  document.querySelector(".numero-caracteres").textContent = sumaCaracteres - 5;
+} // por qué hay que restarle 5?? espacios??
 
 const botonSubmit = document.querySelector(".boton-submit");
 
