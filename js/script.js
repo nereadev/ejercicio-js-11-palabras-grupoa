@@ -75,6 +75,7 @@ const palabras = document.querySelectorAll(".lista-palabras li");
 const botonSubmit = document.querySelector(".boton-submit");
 const inputPalabra = document.querySelector(".input-palabra");
 const numeroVeces = document.querySelector(".numero-veces");
+const esLenguaje = document.querySelector(".es-lenguaje");
 const nuevasPalabras = [];
 
 botonSubmit.disabled = true;
@@ -93,6 +94,10 @@ document.body.addEventListener("click", e => {
     const palabraAAnyadir = palabras[0].cloneNode(true);
     palabraAAnyadir.textContent = inputPalabra.value;
     if (!(devuelvePalabrasIzquierda().includes(inputPalabra.value)) && !(inputPalabra.value.includes(" "))) {
+      if (esLenguaje.checked) {
+        palabraAAnyadir.setAttribute("data-lenguaje", "si");
+      }
+
       recuadroIzquierda.append(palabraAAnyadir);
     } else {
       console.log("No puedes incluir una palabra ya existente o con espacios.");
