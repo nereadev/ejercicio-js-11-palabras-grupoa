@@ -1,3 +1,27 @@
+const palabras = document.querySelectorAll(".lista-palabras li");
+const nuevasPalabras = [];
+
+for (const palabra of palabras) {
+  const nuevaPalabra = palabra.cloneNode(true);
+  palabra.addEventListener("click", () => {
+    if (document.querySelector(".resultado").children.length === 0) {
+      nuevaPalabra.textContent = nuevaPalabra.textContent.charAt(0).toUpperCase() + nuevaPalabra.textContent.slice(1);
+      document.querySelector(".resultado").append(nuevaPalabra);
+    } else {
+      /* nuevasPalabras.push(nuevaPalabra.textContent);
+      if (nuevaPalabra.textContent === nuevasPalabras[0]) {
+        nuevaPalabra.textContent = nuevaPalabra.textContent.charAt(0).toUpperCase() + nuevaPalabra.textContent.slice(1);
+      } */
+      document.querySelector(".resultado").append(palabra);
+    }
+    //parte Nerea
+    contarPalabras();
+    contarCaracteres();
+    longitudMedia();
+    esLenguajeProgramacion(palabra);
+  });
+}
+
 const recuadroIzquierda = document.querySelector(".lista-palabras");
 const recuadroNuevasPalabras = document.querySelector(".resultado");
 let palabraClonada;
@@ -28,13 +52,12 @@ const mayuscular = () => {
       + primeraPalabra.textContent.slice(1);
   }
 };
-contarPalabras();
-contarCaracteres();
-longitudMedia();
 
+//parte Nerea
 document.querySelector(".numero-palabras").textContent = 0;
 document.querySelector(".numero-caracteres").textContent = 0;
 document.querySelector(".longitud-media").textContent = 0;
+document.querySelector(".numero-lenguajes").textContent = 0;
 
 function contarPalabras() {
   const totalPalabras = document.querySelector(".resultado").children.length;
@@ -51,6 +74,22 @@ function longitudMedia() {
   const calculaMedia = (longitudTotal / totalPalabras);
   document.querySelector(".longitud-media").textContent = calculaMedia.toFixed(2);
 }
+
+function esLenguajeProgramacion(palabra) {
+  if (document.querySelector(".resultado").querySelectorAll("[data-lenguaje=si]").length !== 0) {
+    document.querySelector(".numero-lenguajes").textContent = document.querySelector(".resultado").querySelectorAll("[data-lenguaje=si]").length;
+    if (palabra.textContent === "JavaScript") {
+      document.querySelector(".javascript").hidden = false;
+    }
+    if (palabra.textContent === "Java") {
+      document.querySelector(".java").hidden = false;
+    }
+  }
+}
+
+
+
+
 
 // parte Bernat
 
@@ -79,3 +118,4 @@ document.body.addEventListener("click", e => {
     listaPalabras.append(palabraAAnyadir);
   }
 });
+*/
