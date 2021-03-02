@@ -1,26 +1,38 @@
-const listaPalabras = document.querySelector(".lista-palabras");
-const palabras = document.querySelectorAll(".lista-palabras li");
-const botonSubmit = document.querySelector(".boton-submit");
-const inputPalabra = document.querySelector(".input-palabra");
-const numeroVeces = document.querySelector(".numero-veces");
-const nuevasPalabras = [];
 
-for (const palabra of palabras) {
-  const nuevaPalabra = palabra.cloneNode(true);
+const palabrasIzquierda = document.querySelectorAll(".lista-palabras li");
+const recuadroNuevasPalabras = document.querySelector(".resultado");
+let palabraClonada;
+
+for (const palabra of palabrasIzquierda) {
   palabra.addEventListener("click", () => {
-    if (document.querySelector(".resultado").children.length === 0) {
-      nuevaPalabra.textContent = nuevaPalabra.textContent.charAt(0).toUpperCase() + nuevaPalabra.textContent.slice(1);
-    }
-    /* nuevasPalabras.push(nuevaPalabra.textContent);
-    if (nuevaPalabra.textContent === nuevasPalabras[0]) {
-      nuevaPalabra.textContent = nuevaPalabra.textContent.charAt(0).toUpperCase() + nuevaPalabra.textContent.slice(1);
-    } */
-    document.querySelector(".resultado").append(nuevaPalabra);
-    contarPalabras();
-    contarCaracteres();
-    longitudMedia();
+    clonaPalabra(palabra);
   });
 }
+
+const clonaPalabra = palabraAClonar => {
+  palabraClonada = palabraAClonar.cloneNode(true);
+  pegaPalabra(palabraClonada);
+};
+
+const pegaPalabra = palabraAPegar => {
+  recuadroNuevasPalabras.append(palabraAPegar);
+  mayuscular();
+  palabraAPegar.addEventListener("click", () => {
+    palabraAPegar.remove();
+    mayuscular();
+  });
+};
+
+const mayuscular = palabraAComprobar => {
+  if (recuadroNuevasPalabras.children.length >= 0) {
+    const primeraPalabra = document.querySelector(".resultado li");
+    primeraPalabra.textContent = primeraPalabra.textContent.charAt(0).toUpperCase()
+      + primeraPalabra.textContent.slice(1);
+  }
+};
+contarPalabras();
+contarCaracteres();
+longitudMedia();
 
 document.querySelector(".numero-palabras").textContent = 0;
 document.querySelector(".numero-caracteres").textContent = 0;
@@ -50,7 +62,6 @@ function longitudMedia() {
 
 const listaPalabras = document.querySelector(".lista-palabras");
 const palabras = document.querySelectorAll(".lista-palabras li");
-const botonSubmit = document.querySelector(".boton-submit");
 const botonSubmit = document.querySelector(".boton-submit");
 const inputPalabra = document.querySelector(".input-palabra");
 const numeroVeces = document.querySelector(".numero-veces");
