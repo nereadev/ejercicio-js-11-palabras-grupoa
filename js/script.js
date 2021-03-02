@@ -1,8 +1,4 @@
-const listaPalabras = document.querySelector(".lista-palabras");
 const palabras = document.querySelectorAll(".lista-palabras li");
-const botonSubmit = document.querySelector(".boton-submit");
-const inputPalabra = document.querySelector(".input-palabra");
-const numeroVeces = document.querySelector(".numero-veces");
 const nuevasPalabras = [];
 
 for (const palabra of palabras) {
@@ -10,21 +6,25 @@ for (const palabra of palabras) {
   palabra.addEventListener("click", () => {
     if (document.querySelector(".resultado").children.length === 0) {
       nuevaPalabra.textContent = nuevaPalabra.textContent.charAt(0).toUpperCase() + nuevaPalabra.textContent.slice(1);
+      document.querySelector(".resultado").append(nuevaPalabra);
+    } else {
+      /* nuevasPalabras.push(nuevaPalabra.textContent);
+      if (nuevaPalabra.textContent === nuevasPalabras[0]) {
+        nuevaPalabra.textContent = nuevaPalabra.textContent.charAt(0).toUpperCase() + nuevaPalabra.textContent.slice(1);
+      } */
+      document.querySelector(".resultado").append(palabra);
     }
-    /* nuevasPalabras.push(nuevaPalabra.textContent);
-    if (nuevaPalabra.textContent === nuevasPalabras[0]) {
-      nuevaPalabra.textContent = nuevaPalabra.textContent.charAt(0).toUpperCase() + nuevaPalabra.textContent.slice(1);
-    } */
-    document.querySelector(".resultado").append(nuevaPalabra);
     contarPalabras();
     contarCaracteres();
     longitudMedia();
+    esLenguajeProgramacion(palabra);
   });
 }
 
 document.querySelector(".numero-palabras").textContent = 0;
 document.querySelector(".numero-caracteres").textContent = 0;
 document.querySelector(".longitud-media").textContent = 0;
+document.querySelector(".numero-lenguajes").textContent = 0;
 
 function contarPalabras() {
   const totalPalabras = document.querySelector(".resultado").children.length;
@@ -42,10 +42,35 @@ function longitudMedia() {
   document.querySelector(".longitud-media").textContent = calculaMedia.toFixed(2);
 }
 
+function esLenguajeProgramacion(palabra) {
+  if (document.querySelector(".resultado").querySelectorAll("[data-lenguaje=si]").length !== 0) {
+    document.querySelector(".numero-lenguajes").textContent = document.querySelector(".resultado").querySelectorAll("[data-lenguaje=si]").length;
+    if (palabra.textContent === "JavaScript") {
+      document.querySelector(".javascript").hidden = false;
+    }
+    if (palabra.textContent === "Java") {
+      document.querySelector(".java").hidden = false;
+    }
+  }
+}
 
+/*
 
+if (palabra.querySelector("[data-lenguaje=si]")) {
+  if (palabra.textContent === "Javascript") {
+    document.querySelector(".javascript").hidden = false;
+    document.querySelector(".numero-lenguajes").textContent = palabra.length;
+  }
+  if (palabra.textContent === "Java") {
+    document.querySelector(".java").hidden = false;
+    document.querySelector(".numero-lenguajes").textContent = palabra.length;
+  }
+} else {
+  console.log("hola");
+}
 
-
+*/
+/*
 //parte Bernat
 
 const listaPalabras = document.querySelector(".lista-palabras");
@@ -74,3 +99,4 @@ document.body.addEventListener("click", e => {
     listaPalabras.append(palabraAAnyadir);
   }
 });
+*/
