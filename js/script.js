@@ -1,29 +1,27 @@
-
-const palabrasIzquierda = document.querySelectorAll(".lista-palabras li");
+const recuadroIzquierda = document.querySelector(".lista-palabras");
 const recuadroNuevasPalabras = document.querySelector(".resultado");
 let palabraClonada;
 
-for (const palabra of palabrasIzquierda) {
-  palabra.addEventListener("click", () => {
-    clonaPalabra(palabra);
-  });
-}
+recuadroIzquierda.addEventListener("click", accion => {
+  if (accion.target.parentElement === recuadroIzquierda) {
+    clonaYPegaPalabra(accion.target);
+  }
+});
 
-const clonaPalabra = palabraAClonar => {
-  palabraClonada = palabraAClonar.cloneNode(true);
-  pegaPalabra(palabraClonada);
-};
-
-const pegaPalabra = palabraAPegar => {
-  recuadroNuevasPalabras.append(palabraAPegar);
-  mayuscular();
-  palabraAPegar.addEventListener("click", () => {
-    palabraAPegar.remove();
+recuadroNuevasPalabras.addEventListener("click", accion => {
+  if (accion.target.parentElement === recuadroNuevasPalabras) {
+    accion.target.remove();
     mayuscular();
-  });
+  }
+});
+
+const clonaYPegaPalabra = palabraAClonar => {
+  palabraClonada = palabraAClonar.cloneNode(true);
+  recuadroNuevasPalabras.append(palabraClonada);
+  mayuscular();
 };
 
-const mayuscular = palabraAComprobar => {
+const mayuscular = () => {
   if (recuadroNuevasPalabras.children.length >= 0) {
     const primeraPalabra = document.querySelector(".resultado li");
     primeraPalabra.textContent = primeraPalabra.textContent.charAt(0).toUpperCase()
@@ -54,11 +52,7 @@ function longitudMedia() {
   document.querySelector(".longitud-media").textContent = calculaMedia.toFixed(2);
 }
 
-
-
-
-
-//parte Bernat
+// parte Bernat
 
 const listaPalabras = document.querySelector(".lista-palabras");
 const palabras = document.querySelectorAll(".lista-palabras li");
