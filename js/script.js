@@ -92,16 +92,16 @@ document.body.addEventListener("click", e => {
     e.preventDefault();
     const palabraAAnyadir = palabras[0].cloneNode(true);
     palabraAAnyadir.textContent = inputPalabra.value;
-    if (!(devuelvePalabrasIzquierda().includes(inputPalabra.value))) {
+    if (!(devuelvePalabrasIzquierda().includes(inputPalabra.value)) && !(inputPalabra.value.includes(" "))) {
       recuadroIzquierda.append(palabraAAnyadir);
     } else {
-      console.log("No puedes incluir una palabra ya existente.");
+      console.log("No puedes incluir una palabra ya existente o con espacios.");
+      /* mirar como se lanzan los toasts desde el submit, por ejemplo si no esta el required */
     }
   }
 });
 
-console.log(recuadroIzquierda.textContent);
-
+/* si creas una palabra nueva esta si que puede ser puesta mas de una vez, solucionar */
 const devuelvePalabrasIzquierda = () => {
   let palabrasIzquierda = recuadroIzquierda.textContent.split("\n      ");
   palabrasIzquierda.shift();
