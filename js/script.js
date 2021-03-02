@@ -41,3 +41,36 @@ function longitudMedia() {
   const calculaMedia = (longitudTotal / totalPalabras);
   document.querySelector(".longitud-media").textContent = calculaMedia.toFixed(2);
 }
+
+
+
+
+
+//parte Bernat
+
+const listaPalabras = document.querySelector(".lista-palabras");
+const palabras = document.querySelectorAll(".lista-palabras li");
+const botonSubmit = document.querySelector(".boton-submit");
+const botonSubmit = document.querySelector(".boton-submit");
+const inputPalabra = document.querySelector(".input-palabra");
+const numeroVeces = document.querySelector(".numero-veces");
+const nuevasPalabras = [];
+
+botonSubmit.disabled = true;
+
+document.body.addEventListener("input", e => {
+  if (e.target.classList.contains("input-palabra")) {
+    if (e.target.value !== "") {
+      botonSubmit.disabled = false;
+    }
+  }
+});
+
+document.body.addEventListener("click", e => {
+  if (e.target.classList.contains("boton-submit")) {
+    e.preventDefault();
+    const palabraAAnyadir = palabras[0].cloneNode(true);
+    palabraAAnyadir.textContent = inputPalabra.value;
+    listaPalabras.append(palabraAAnyadir);
+  }
+});
