@@ -4,25 +4,24 @@ let palabraClonada;
 
 recuadroIzquierda.addEventListener("click", accion => {
   if (accion.target.parentElement === recuadroIzquierda) {
-    clonaPalabra(accion.target);
+    clonaYPegaPalabra(accion.target);
   }
 });
 
-const clonaPalabra = palabraAClonar => {
-  palabraClonada = palabraAClonar.cloneNode(true);
-  pegaPalabra(palabraClonada);
-};
-
-const pegaPalabra = palabraAPegar => {
-  recuadroNuevasPalabras.append(palabraAPegar);
-  mayuscular();
-  palabraAPegar.addEventListener("click", () => {
-    palabraAPegar.remove();
+recuadroNuevasPalabras.addEventListener("click", accion => {
+  if (accion.target.parentElement === recuadroNuevasPalabras) {
+    accion.target.remove();
     mayuscular();
-  });
+  }
+});
+
+const clonaYPegaPalabra = palabraAClonar => {
+  palabraClonada = palabraAClonar.cloneNode(true);
+  recuadroNuevasPalabras.append(palabraClonada);
+  mayuscular();
 };
 
-const mayuscular = palabraAComprobar => {
+const mayuscular = () => {
   if (recuadroNuevasPalabras.children.length >= 0) {
     const primeraPalabra = document.querySelector(".resultado li");
     primeraPalabra.textContent = primeraPalabra.textContent.charAt(0).toUpperCase()
