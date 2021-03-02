@@ -18,9 +18,9 @@ for (const palabra of palabras) {
     document.querySelector(".resultado").append(nuevaPalabra);
     contarPalabras();
     contarCaracteres();
+    longitudMedia();
   });
 }
-
 
 document.querySelector(".numero-palabras").textContent = 0;
 document.querySelector(".numero-caracteres").textContent = 0;
@@ -35,27 +35,9 @@ function contarCaracteres() {
   document.querySelector(".numero-caracteres").textContent = sumaCaracteres - 5;
 } // por qué hay que restarle 5?? espacios??
 
-const botonSubmit = document.querySelector(".boton-submit");
-
-botonSubmit.disabled = true;
-
-document.body.addEventListener("input", e => {
-  if (e.target.classList.contains("input-palabra")) {
-    if (e.target.value !== "") {
-
-document.body.addEventListener("change", e => {
-  if (e.target.classList.contains("input-palabra") || e.target.classList.contains("numero-veces")) {
-    if ((inputPalabra.value !== "") && (numeroVeces.value !== "")) {
-      botonSubmit.disabled = false;
-    }
-  }
-});
-
-document.body.addEventListener("click", e => {
-  if (e.target.classList.contains("boton-submit")) {
-    e.preventDefault();
-    const palabraAAnyadir = palabras[0].cloneNode(true);
-    palabraAAnyadir.textContent = inputPalabra.value;
-    listaPalabras.append(palabraAAnyadir);
-  }
-});
+function longitudMedia() {
+  const longitudTotal = (document.querySelector(".resultado").textContent.length - 5);
+  const totalPalabras = document.querySelector(".resultado").children.length;
+  const calculaMedia = (longitudTotal / totalPalabras);
+  document.querySelector(".longitud-media").textContent = calculaMedia.toFixed(2);
+}
