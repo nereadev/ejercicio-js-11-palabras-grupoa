@@ -14,6 +14,7 @@ for (const palabra of palabras) {
       } */
       document.querySelector(".resultado").append(palabra);
     }
+    //parte Nerea
     contarPalabras();
     contarCaracteres();
     longitudMedia();
@@ -21,6 +22,38 @@ for (const palabra of palabras) {
   });
 }
 
+const recuadroIzquierda = document.querySelector(".lista-palabras");
+const recuadroNuevasPalabras = document.querySelector(".resultado");
+let palabraClonada;
+
+recuadroIzquierda.addEventListener("click", accion => {
+  if (accion.target.parentElement === recuadroIzquierda) {
+    clonaYPegaPalabra(accion.target);
+  }
+});
+
+recuadroNuevasPalabras.addEventListener("click", accion => {
+  if (accion.target.parentElement === recuadroNuevasPalabras) {
+    accion.target.remove();
+    mayuscular();
+  }
+});
+
+const clonaYPegaPalabra = palabraAClonar => {
+  palabraClonada = palabraAClonar.cloneNode(true);
+  recuadroNuevasPalabras.append(palabraClonada);
+  mayuscular();
+};
+
+const mayuscular = () => {
+  if (recuadroNuevasPalabras.children.length >= 0) {
+    const primeraPalabra = document.querySelector(".resultado li");
+    primeraPalabra.textContent = primeraPalabra.textContent.charAt(0).toUpperCase()
+      + primeraPalabra.textContent.slice(1);
+  }
+};
+
+//parte Nerea
 document.querySelector(".numero-palabras").textContent = 0;
 document.querySelector(".numero-caracteres").textContent = 0;
 document.querySelector(".longitud-media").textContent = 0;
@@ -54,28 +87,14 @@ function esLenguajeProgramacion(palabra) {
   }
 }
 
-/*
 
-if (palabra.querySelector("[data-lenguaje=si]")) {
-  if (palabra.textContent === "Javascript") {
-    document.querySelector(".javascript").hidden = false;
-    document.querySelector(".numero-lenguajes").textContent = palabra.length;
-  }
-  if (palabra.textContent === "Java") {
-    document.querySelector(".java").hidden = false;
-    document.querySelector(".numero-lenguajes").textContent = palabra.length;
-  }
-} else {
-  console.log("hola");
-}
 
-*/
-/*
-//parte Bernat
+
+
+// parte Bernat
 
 const listaPalabras = document.querySelector(".lista-palabras");
 const palabras = document.querySelectorAll(".lista-palabras li");
-const botonSubmit = document.querySelector(".boton-submit");
 const botonSubmit = document.querySelector(".boton-submit");
 const inputPalabra = document.querySelector(".input-palabra");
 const numeroVeces = document.querySelector(".numero-veces");
