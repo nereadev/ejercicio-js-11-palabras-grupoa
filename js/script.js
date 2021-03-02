@@ -1,26 +1,34 @@
-const palabras = document.querySelectorAll(".lista-palabras li");
-const nuevasPalabras = [];
+const palabrasIzquierda = document.querySelectorAll(".lista-palabras li");
+const recuadroNuevasPalabras = document.querySelector(".resultado");
+let palabraClonada;
 
-for (const palabra of palabras) {
-  let nuevaPalabra;
+for (const palabra of palabrasIzquierda) {
   palabra.addEventListener("click", () => {
-    /*     if (document.querySelector(".resultado").children.length === 0) {
-      nuevaPalabra.textContent = nuevaPalabra.textContent.charAt(0).toUpperCase() + nuevaPalabra.textContent.slice(1);
-    } */
-    nuevaPalabra = palabra.cloneNode(true);
-    nuevasPalabras.push(nuevaPalabra.textContent);
-    if (nuevaPalabra.textContent === nuevasPalabras[0]) {
-      nuevaPalabra.textContent = nuevaPalabra.textContent.charAt(0).toUpperCase() + nuevaPalabra.textContent.slice(1);
-    }
-    document.querySelector(".resultado").append(nuevaPalabra);
-    console.log(nuevasPalabras);
+    clonaPalabra(palabra);
   });
-  /*   nuevaPalabra.addEventListener("click", () => {
-      const posicionPalabra = nuevasPalabras.indexOf(nuevaPalabra.textContent);
-      nuevasPalabras.splice(posicionPalabra, 1);
-      nuevaPalabra.remove();
-    }); */
 }
+
+const clonaPalabra = palabraAClonar => {
+  palabraClonada = palabraAClonar.cloneNode(true);
+  pegaPalabra(palabraClonada);
+};
+
+const pegaPalabra = palabraAPegar => {
+  recuadroNuevasPalabras.append(palabraAPegar);
+  mayuscular();
+  palabraAPegar.addEventListener("click", () => {
+    palabraAPegar.remove();
+    mayuscular();
+  });
+};
+
+const mayuscular = palabraAComprobar => {
+  if (recuadroNuevasPalabras.children.length >= 0) {
+    const primeraPalabra = document.querySelector(".resultado li");
+    primeraPalabra.textContent = primeraPalabra.textContent.charAt(0).toUpperCase()
+      + primeraPalabra.textContent.slice(1);
+  }
+};
 
 const botonSubmit = document.querySelector(".boton-submit");
 
