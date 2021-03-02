@@ -48,8 +48,9 @@ function contarPalabras() {
 }
 function contarCaracteres() {
   const sumaCaracteres = recuadroNuevasPalabras.textContent.length;
+  /* console.log(recuadroNuevasPalabras.textContent.split("")); */
   document.querySelector(".numero-caracteres").textContent = sumaCaracteres - 5;
-} // por qué hay que restarle 5?? espacios??
+} // por qué hay que restarle 5?? espacios?? consolea lo que está comentado
 
 function longitudMedia() {
   const longitudTotal = (recuadroNuevasPalabras.textContent.length - 5);
@@ -70,10 +71,6 @@ function esLenguajeProgramacion(palabra) {
   }
 }
 
-/*
-// parte Bernat
-
-const listaPalabras = document.querySelector(".lista-palabras");
 const palabras = document.querySelectorAll(".lista-palabras li");
 const botonSubmit = document.querySelector(".boton-submit");
 const inputPalabra = document.querySelector(".input-palabra");
@@ -82,9 +79,9 @@ const nuevasPalabras = [];
 
 botonSubmit.disabled = true;
 
-document.body.addEventListener("input", e => {
-  if (e.target.classList.contains("input-palabra")) {
-    if (e.target.value !== "") {
+document.body.addEventListener("change", e => {
+  if (e.target.classList.contains("input-palabra") || e.target.classList.contains("numero-veces")) {
+    if ((inputPalabra.value !== "") && (numeroVeces.value !== "")) {
       botonSubmit.disabled = false;
     }
   }
@@ -95,7 +92,22 @@ document.body.addEventListener("click", e => {
     e.preventDefault();
     const palabraAAnyadir = palabras[0].cloneNode(true);
     palabraAAnyadir.textContent = inputPalabra.value;
-    listaPalabras.append(palabraAAnyadir);
+    if (!(devuelvePalabrasIzquierda().includes(inputPalabra.value))) {
+      recuadroIzquierda.append(palabraAAnyadir);
+    } else {
+      console.log("No puedes incluir una palabra ya existente.");
+    }
   }
 });
-*/
+
+console.log(recuadroIzquierda.textContent);
+
+const devuelvePalabrasIzquierda = () => {
+  let palabrasIzquierda = recuadroIzquierda.textContent.split("\n      ");
+  palabrasIzquierda.shift();
+  palabrasIzquierda[palabrasIzquierda.length - 1] = palabrasIzquierda[palabrasIzquierda.length - 1]
+    .replace("\n    ", "");
+  return palabrasIzquierda;
+}
+
+devuelvePalabrasIzquierda();
