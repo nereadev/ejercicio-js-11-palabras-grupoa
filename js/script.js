@@ -1,4 +1,8 @@
+const listaPalabras = document.querySelector(".lista-palabras");
 const palabras = document.querySelectorAll(".lista-palabras li");
+const botonSubmit = document.querySelector(".boton-submit");
+const inputPalabra = document.querySelector(".input-palabra");
+const numeroVeces = document.querySelector(".numero-veces");
 const nuevasPalabras = [];
 
 for (const palabra of palabras) {
@@ -16,6 +20,7 @@ for (const palabra of palabras) {
     contarCaracteres();
   });
 }
+
 
 document.querySelector(".numero-palabras").textContent = 0;
 document.querySelector(".numero-caracteres").textContent = 0;
@@ -37,7 +42,20 @@ botonSubmit.disabled = true;
 document.body.addEventListener("input", e => {
   if (e.target.classList.contains("input-palabra")) {
     if (e.target.value !== "") {
+
+document.body.addEventListener("change", e => {
+  if (e.target.classList.contains("input-palabra") || e.target.classList.contains("numero-veces")) {
+    if ((inputPalabra.value !== "") && (numeroVeces.value !== "")) {
       botonSubmit.disabled = false;
     }
+  }
+});
+
+document.body.addEventListener("click", e => {
+  if (e.target.classList.contains("boton-submit")) {
+    e.preventDefault();
+    const palabraAAnyadir = palabras[0].cloneNode(true);
+    palabraAAnyadir.textContent = inputPalabra.value;
+    listaPalabras.append(palabraAAnyadir);
   }
 });
