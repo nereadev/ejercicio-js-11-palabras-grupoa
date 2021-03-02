@@ -1,13 +1,12 @@
-
-const palabrasIzquierda = document.querySelectorAll(".lista-palabras li");
+const recuadroIzquierda = document.querySelector(".lista-palabras");
 const recuadroNuevasPalabras = document.querySelector(".resultado");
 let palabraClonada;
 
-for (const palabra of palabrasIzquierda) {
-  palabra.addEventListener("click", () => {
-    clonaPalabra(palabra);
-  });
-}
+recuadroIzquierda.addEventListener("click", accion => {
+  if (accion.target.parentElement === recuadroIzquierda) {
+    clonaPalabra(accion.target);
+  }
+});
 
 const clonaPalabra = palabraAClonar => {
   palabraClonada = palabraAClonar.cloneNode(true);
@@ -54,11 +53,7 @@ function longitudMedia() {
   document.querySelector(".longitud-media").textContent = calculaMedia.toFixed(2);
 }
 
-
-
-
-
-//parte Bernat
+// parte Bernat
 
 const listaPalabras = document.querySelector(".lista-palabras");
 const palabras = document.querySelectorAll(".lista-palabras li");
