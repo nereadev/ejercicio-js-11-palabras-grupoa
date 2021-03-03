@@ -10,6 +10,7 @@ recuadroIzquierda.addEventListener("click", accion => {
 
 recuadroNuevasPalabras.addEventListener("click", accion => {
   if (accion.target.parentElement === recuadroNuevasPalabras) {
+    resetCalculo();
     accion.target.remove();
     mayuscular();
     contarPalabras();
@@ -37,10 +38,15 @@ const mayuscular = () => {
   }
 };
 
-document.querySelector(".numero-palabras").textContent = 0;
-document.querySelector(".numero-caracteres").textContent = 0;
-document.querySelector(".longitud-media").textContent = 0;
-document.querySelector(".numero-lenguajes").textContent = 0;
+resetCalculo();
+function resetCalculo() {
+  if (recuadroNuevasPalabras.children.length <= 1) {
+    document.querySelector(".numero-palabras").textContent = 0;
+    document.querySelector(".numero-caracteres").textContent = 0;
+    document.querySelector(".longitud-media").textContent = 0;
+    document.querySelector(".numero-lenguajes").textContent = 0;
+  }
+}
 
 function contarPalabras() {
   const totalPalabras = recuadroNuevasPalabras.children.length;
@@ -48,7 +54,7 @@ function contarPalabras() {
 }
 function contarCaracteres() {
   const sumaCaracteres = recuadroNuevasPalabras.textContent.length;
-  /* console.log(recuadroNuevasPalabras.textContent.split("")); */
+  // console.log(recuadroNuevasPalabras.textContent.split(""));
   document.querySelector(".numero-caracteres").textContent = sumaCaracteres - 5;
 } // por qué hay que restarle 5?? espacios?? consolea lo que está comentado
 
@@ -108,11 +114,11 @@ document.body.addEventListener("click", e => {
 
 /* si creas una palabra nueva esta si que puede ser puesta mas de una vez, solucionar */
 const devuelvePalabrasIzquierda = () => {
-  let palabrasIzquierda = recuadroIzquierda.textContent.split("\n      ");
+  const palabrasIzquierda = recuadroIzquierda.textContent.split("\n      ");
   palabrasIzquierda.shift();
   palabrasIzquierda[palabrasIzquierda.length - 1] = palabrasIzquierda[palabrasIzquierda.length - 1]
     .replace("\n    ", "");
   return palabrasIzquierda;
-}
+};
 
 devuelvePalabrasIzquierda();
