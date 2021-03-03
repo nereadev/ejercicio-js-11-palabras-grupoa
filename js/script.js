@@ -94,16 +94,20 @@ document.body.addEventListener("change", e => {
   }
 });
 
+/* una vez añadidas la cantidad de veces que se puede usar una palabra, hacer que en recuadroIzquierda.addEventListener
+chequee la propiedad y reste uno y elimine etiqueta si llega a 0 veces */
 document.body.addEventListener("click", e => {
   if (e.target.classList.contains("boton-submit")) {
     e.preventDefault();
     const palabraAAnyadir = palabras[0].cloneNode(true);
     palabraAAnyadir.textContent = inputPalabra.value;
     if (!(devuelvePalabrasIzquierda().includes(inputPalabra.value)) && !(inputPalabra.value.includes(" "))) {
+      if ((numeroVeces.value === "1") || (numeroVeces.value === "2") || (numeroVeces.value === "3")) {
+        palabraAAnyadir.setAttribute("max-veces", +numeroVeces.value);
+      }
       if (esLenguaje.checked) {
         palabraAAnyadir.setAttribute("data-lenguaje", "si");
       }
-
       recuadroIzquierda.append(palabraAAnyadir);
     } else {
       console.log("No puedes incluir una palabra ya existente o con espacios.");
@@ -120,5 +124,3 @@ const devuelvePalabrasIzquierda = () => {
     .replace("\n    ", "");
   return palabrasIzquierda;
 };
-
-devuelvePalabrasIzquierda();
