@@ -5,6 +5,12 @@ let palabraClonada;
 recuadroIzquierda.addEventListener("click", accion => {
   if (accion.target.parentElement === recuadroIzquierda) {
     clonaYPegaPalabra(accion.target);
+    if (accion.target.dataset.maxVeces) {
+      accion.target.dataset.maxVeces -= 1;
+      if (+accion.target.dataset.maxVeces === 0) {
+        accion.target.remove();
+      }
+    }
   }
 });
 
@@ -103,7 +109,7 @@ document.body.addEventListener("click", e => {
     palabraAAnyadir.textContent = inputPalabra.value;
     if (!(devuelvePalabrasIzquierda().includes(inputPalabra.value)) && !(inputPalabra.value.includes(" "))) {
       if ((numeroVeces.value === "1") || (numeroVeces.value === "2") || (numeroVeces.value === "3")) {
-        palabraAAnyadir.setAttribute("max-veces", +numeroVeces.value);
+        palabraAAnyadir.dataset.maxVeces = +numeroVeces.value;
       }
       if (esLenguaje.checked) {
         palabraAAnyadir.setAttribute("data-lenguaje", "si");
