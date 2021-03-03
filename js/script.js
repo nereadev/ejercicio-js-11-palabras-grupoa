@@ -112,7 +112,7 @@ document.body.addEventListener("click", e => {
         palabraAAnyadir.dataset.maxVeces = +numeroVeces.value;
       }
       if (esLenguaje.checked) {
-        palabraAAnyadir.setAttribute("data-lenguaje", "si");
+        palabraAAnyadir.dataset.lenguaje = "si";
       }
       recuadroIzquierda.append(palabraAAnyadir);
     } else {
