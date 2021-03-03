@@ -1,6 +1,10 @@
 const recuadroIzquierda = document.querySelector(".lista-palabras");
 const recuadroNuevasPalabras = document.querySelector(".resultado");
 let palabraClonada;
+const palabrasIzquierda = recuadroIzquierda.textContent.split("\n      ");
+palabrasIzquierda.shift();
+palabrasIzquierda[palabrasIzquierda.length - 1] = palabrasIzquierda[palabrasIzquierda.length - 1]
+  .replace("\n    ", "");
 
 recuadroIzquierda.addEventListener("click", accion => {
   if (accion.target.parentElement === recuadroIzquierda) {
@@ -107,13 +111,14 @@ document.body.addEventListener("click", e => {
     e.preventDefault();
     const palabraAAnyadir = palabras[0].cloneNode(true);
     palabraAAnyadir.textContent = inputPalabra.value;
-    if (!(devuelvePalabrasIzquierda().includes(inputPalabra.value)) && !(inputPalabra.value.includes(" "))) {
+    if (!(palabrasIzquierda.includes(inputPalabra.value)) && !(inputPalabra.value.includes(" "))) {
       if ((numeroVeces.value === "1") || (numeroVeces.value === "2") || (numeroVeces.value === "3")) {
         palabraAAnyadir.dataset.maxVeces = +numeroVeces.value;
       }
       if (esLenguaje.checked) {
         palabraAAnyadir.dataset.lenguaje = "si";
       }
+      palabrasIzquierda.push(palabraAAnyadir.textContent);
       recuadroIzquierda.append(palabraAAnyadir);
     } else {
       console.log("No puedes incluir una palabra ya existente o con espacios.");
@@ -121,12 +126,3 @@ document.body.addEventListener("click", e => {
     }
   }
 });
-
-/* si creas una palabra nueva esta si que puede ser puesta mas de una vez, solucionar */
-const devuelvePalabrasIzquierda = () => {
-  const palabrasIzquierda = recuadroIzquierda.textContent.split("\n      ");
-  palabrasIzquierda.shift();
-  palabrasIzquierda[palabrasIzquierda.length - 1] = palabrasIzquierda[palabrasIzquierda.length - 1]
-    .replace("\n    ", "");
-  return palabrasIzquierda;
-};
