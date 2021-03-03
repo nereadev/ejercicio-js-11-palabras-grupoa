@@ -104,8 +104,6 @@ document.body.addEventListener("change", e => {
   }
 });
 
-/* una vez añadidas la cantidad de veces que se puede usar una palabra, hacer que en recuadroIzquierda.addEventListener
-chequee la propiedad y reste uno y elimine etiqueta si llega a 0 veces */
 document.body.addEventListener("click", e => {
   if (e.target.classList.contains("boton-submit")) {
     e.preventDefault();
