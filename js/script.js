@@ -104,8 +104,6 @@ document.body.addEventListener("change", e => {
   }
 });
 
-/* una vez añadidas la cantidad de veces que se puede usar una palabra, hacer que en recuadroIzquierda.addEventListener
-chequee la propiedad y reste uno y elimine etiqueta si llega a 0 veces */
 document.body.addEventListener("click", e => {
   if (e.target.classList.contains("boton-submit")) {
     e.preventDefault();
@@ -121,8 +119,8 @@ document.body.addEventListener("click", e => {
       palabrasIzquierda.push(palabraAAnyadir.textContent);
       recuadroIzquierda.append(palabraAAnyadir);
     } else {
-      console.log("No puedes incluir una palabra ya existente o con espacios.");
-      /* mirar como se lanzan los toasts desde el submit, por ejemplo si no esta el required */
+      document.querySelector(".error-padre").classList.remove("no-display");
+      setTimeout(() => document.querySelector(".error-padre").classList.add("no-display"), 3000);
     }
   }
 });
