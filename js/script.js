@@ -119,8 +119,8 @@ document.body.addEventListener("click", e => {
       palabrasIzquierda.push(palabraAAnyadir.textContent);
       recuadroIzquierda.append(palabraAAnyadir);
     } else {
-      console.log("No puedes incluir una palabra ya existente o con espacios.");
-      /* mirar como se lanzan los toasts desde el submit, por ejemplo si no esta el required */
+      document.querySelector(".error-padre").classList.remove("no-display");
+      setTimeout(() => document.querySelector(".error-padre").classList.add("no-display"), 3000);
     }
   }
 });
